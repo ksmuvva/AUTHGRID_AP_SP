@@ -1,0 +1,60 @@
+# AuthGrid Functional POC — Streamlit + VS Code
+
+This POC demonstrates the core flow:
+
+```text
+Microsoft Entra Graph API or demo fixtures
+        ↓
+Normalize and persist events
+        ↓
+Run deterministic detections
+        ↓
+Explainable risk findings with evidence
+        ↓
+Streamlit developer/demo UI
+```
+
+## Run locally
+
+```bash
+cd /home/ubuntu/authgrid-poc
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Open the URL shown by Streamlit. The default **Demo mode** works without Microsoft credentials.
+
+## Optional Microsoft Entra mode
+
+Create a Microsoft Graph application with application permission `AuditLog.Read.All` and admin consent, then create `.env`:
+
+```env
+ENTRA_TENANT_ID=your-tenant-id
+ENTRA_CLIENT_ID=your-client-id
+ENTRA_CLIENT_SECRET=your-client-secret
+```
+
+Run the app, select **Microsoft Entra / Graph** in the sidebar, choose a time window, and click **Sync Entra logs**.
+
+The POC reads:
+
+- `GET /v1.0/auditLogs/signIns`
+- `GET /v1.0/auditLogs/directoryAudits`
+
+The connector uses bounded time filters, pagination, retries, and local deduplication. Keep secrets in `.env`; never commit them.
+
+## Run tests
+
+```bash
+pytest -q
+```
+
+## POC limitations
+
+- SQLite is used for local demonstration.
+- This is not production-ready multi-tenant infrastructure.
+- Graph polling is used instead of Event Hub streaming.
+- Detections are deterministic examples, not a complete security product.
+- Response actions are not implemented.

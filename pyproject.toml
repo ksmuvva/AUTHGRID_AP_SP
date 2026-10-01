@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "authgrid-poc"
+version = "0.1.0"
+dependencies = [
+  "streamlit>=1.40,<2",
+  "requests>=2.32,<3",
+  "pandas>=2.2,<3",
+  "python-dotenv>=1.0,<2",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
