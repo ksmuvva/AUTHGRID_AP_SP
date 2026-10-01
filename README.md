@@ -51,8 +51,33 @@ The connector uses bounded time filters, pagination, retries, and local deduplic
 
 The POC now produces two types of findings:
 
-- **Deterministic rules:** repeated failures, password spray, success after failures, and unusual location.
-- **ML anomaly signal:** point-in-time identity features scored with Isolation Forest when enough events exist, with a transparent feature-based fallback for small datasets.
+- **Deterministic rules:** the four detection types listed below.
+- **ML anomaly signal:** `ml_identity_anomaly`, scored with Isolation Forest when enough events exist, with a transparent feature-based fallback for small datasets.
+
+### Detection types currently implemented
+
+| Detection type | Version | What it detects | Default severity | Risk contribution |
+|---|---|---|---|---:|
+| `repeated_failures` | `repeated-failures-v1` | Three or more failed sign-ins for one identity | Medium | 20 |
+| `success_after_failures` | `success-after-failures-v1` | A successful sign-in after earlier failed sign-ins for the same identity | High | 25 |
+| `unusual_location` | `unusual-location-v1` | Successful sign-ins for one identity from multiple countries | High | 20 |
+| `password_spray` | `password-spray-v1` | Failed sign-ins from one IP against at least three identities | High | 30 |
+| `ml_identity_anomaly` | `isolation-forest-v1` | Behavioural deviation based on identity, IP, country, device, application, time and failure-pattern features | Medium or High | Up to 25 |
+
+### ML feature signals
+
+The current ML detector evaluates these explainable signals:
+
+- new country;
+- new IP address;
+- new device;
+- new application;
+- unusual sign-in time, currently before 06:00 or at/after 22:00 UTC;
+- recent failure burst;
+- IP shared by multiple identities;
+- current event outcome is a failure.
+
+The ML finding stores the anomaly score, model version, contributing signals and source event ID. It is an additional risk signal and does not independently trigger an account action.
 
 ML findings are stored as `ml_identity_anomaly`, include the model version and contributing signals, and link to the source event used as evidence. They are an additional risk signal—not an autonomous account-action decision. An LLM investigation assistant is intentionally not connected yet; it should explain and correlate evidence after the detection layer is evaluated.
 
