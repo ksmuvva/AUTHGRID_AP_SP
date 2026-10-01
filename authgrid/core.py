@@ -157,6 +157,12 @@ def sync_entra(tenant_id: str, client_id: str, client_secret: str, since: dateti
 
 
 def seed_demo(db_path: str = DB_PATH, tenant_id: str = "demo-tenant") -> int:
+    fixture_path = Path(__file__).resolve().parent.parent / "data" / "synthetic_events.json"
+    if fixture_path.exists():
+        fixture_events = json.loads(fixture_path.read_text())
+        events = [normalize_event(raw, tenant_id, "sign_in", "demo") for raw in fixture_events]
+        return save_events(connect(db_path), events)
+
     now = utcnow()
     def ev(i: str, minutes: int, identity: str, ip: str, country: str, outcome: str, app: str = "Microsoft 365", device: str = "Windows") -> dict[str, Any]:
         raw = {"id": i, "createdDateTime": (now - timedelta(minutes=minutes)).isoformat(), "userPrincipalName": identity,

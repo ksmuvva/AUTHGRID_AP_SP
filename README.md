@@ -3,7 +3,7 @@
 This POC demonstrates the core flow:
 
 ```text
-Microsoft Entra Graph API or demo fixtures
+Microsoft Entra Graph API or committed synthetic fixtures
         ↓
 Normalize and persist events
         ↓
@@ -25,6 +25,8 @@ streamlit run app.py
 ```
 
 Open the URL shown by Streamlit. The default **Demo mode** works without Microsoft credentials.
+
+The committed test dataset is [`data/synthetic_events.json`](data/synthetic_events.json). It contains sanitized, non-production Entra-like events designed to demonstrate unusual location, repeated failures, success after failures, and password-spray findings.
 
 ## Optional Microsoft Entra mode
 
@@ -56,5 +58,6 @@ pytest -q
 - SQLite is used for local demonstration.
 - This is not production-ready multi-tenant infrastructure.
 - Graph polling is used instead of Event Hub streaming.
-- Detections are deterministic examples, not a complete security product.
+- Current detections are deterministic rule-based examples, not AI/ML detections and not a complete security product.
+- AI/ML is intentionally not used as the authoritative detector in this first POC. A production design should use AI/ML as a scored signal alongside deterministic rules, with evidence, evaluation, false-positive monitoring, drift monitoring, and human review.
 - Response actions are not implemented.

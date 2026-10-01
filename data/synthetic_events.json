@@ -1,0 +1,82 @@
+[
+  {
+    "id": "demo-1",
+    "createdDateTime": "2026-09-30T10:55:00Z",
+    "userPrincipalName": "alice@contoso.test",
+    "ipAddress": "203.0.113.10",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 0},
+    "location": {"countryOrRegion": "GB"},
+    "deviceDetail": {"displayName": "Alice-Laptop", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-2",
+    "createdDateTime": "2026-09-30T10:52:00Z",
+    "userPrincipalName": "alice@contoso.test",
+    "ipAddress": "198.51.100.44",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 0},
+    "location": {"countryOrRegion": "SG"},
+    "deviceDetail": {"displayName": "Unknown", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-3",
+    "createdDateTime": "2026-09-30T10:46:00Z",
+    "userPrincipalName": "bob@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 50126},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Bob-Laptop", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-4",
+    "createdDateTime": "2026-09-30T10:47:00Z",
+    "userPrincipalName": "bob@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 50126},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Bob-Laptop", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-5",
+    "createdDateTime": "2026-09-30T10:48:00Z",
+    "userPrincipalName": "bob@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 50126},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Bob-Laptop", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-6",
+    "createdDateTime": "2026-09-30T10:50:00Z",
+    "userPrincipalName": "bob@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 0},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Bob-Laptop", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-7",
+    "createdDateTime": "2026-09-30T10:54:00Z",
+    "userPrincipalName": "carol@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 50126},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Unknown", "operatingSystem": "Windows 11"}
+  },
+  {
+    "id": "demo-8",
+    "createdDateTime": "2026-09-30T10:55:00Z",
+    "userPrincipalName": "dave@contoso.test",
+    "ipAddress": "192.0.2.50",
+    "appDisplayName": "Microsoft 365",
+    "status": {"errorCode": 50126},
+    "location": {"countryOrRegion": "US"},
+    "deviceDetail": {"displayName": "Unknown", "operatingSystem": "Windows 11"}
+  }
+]
