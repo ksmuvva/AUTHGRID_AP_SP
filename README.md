@@ -79,7 +79,7 @@ The current ML detector evaluates these explainable signals:
 
 The ML finding stores the anomaly score, model version, contributing signals and source event ID. It is an additional risk signal and does not independently trigger an account action.
 
-ML findings are stored as `ml_identity_anomaly`, include the model version and contributing signals, and link to the source event used as evidence. They are an additional risk signal—not an autonomous account-action decision. An LLM investigation assistant is intentionally not connected yet; it should explain and correlate evidence after the detection layer is evaluated.
+An LLM investigation assistant is intentionally not connected yet; it should explain and correlate evidence after the detection layer is evaluated.
 
 ## Run tests
 
