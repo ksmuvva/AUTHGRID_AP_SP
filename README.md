@@ -7,7 +7,7 @@ Microsoft Entra Graph API or committed synthetic fixtures
         ↓
 Normalize and persist events
         ↓
-Run deterministic detections
+Run deterministic rules and ML anomaly detection
         ↓
 Explainable risk findings with evidence
         ↓
@@ -47,6 +47,15 @@ The POC reads:
 
 The connector uses bounded time filters, pagination, retries, and local deduplication. Keep secrets in `.env`; never commit them.
 
+## Hybrid detection model
+
+The POC now produces two types of findings:
+
+- **Deterministic rules:** repeated failures, password spray, success after failures, and unusual location.
+- **ML anomaly signal:** point-in-time identity features scored with Isolation Forest when enough events exist, with a transparent feature-based fallback for small datasets.
+
+ML findings are stored as `ml_identity_anomaly`, include the model version and contributing signals, and link to the source event used as evidence. They are an additional risk signal—not an autonomous account-action decision. An LLM investigation assistant is intentionally not connected yet; it should explain and correlate evidence after the detection layer is evaluated.
+
 ## Run tests
 
 ```bash
@@ -58,6 +67,6 @@ pytest -q
 - SQLite is used for local demonstration.
 - This is not production-ready multi-tenant infrastructure.
 - Graph polling is used instead of Event Hub streaming.
-- Current detections are deterministic rule-based examples, not AI/ML detections and not a complete security product.
-- AI/ML is intentionally not used as the authoritative detector in this first POC. A production design should use AI/ML as a scored signal alongside deterministic rules, with evidence, evaluation, false-positive monitoring, drift monitoring, and human review.
+- The ML layer is a prototype anomaly signal, not a validated production model.
+- A production design should add labelled evaluation, false-positive monitoring, drift monitoring, per-tenant baselines, and human review before ML affects automated actions.
 - Response actions are not implemented.

@@ -16,7 +16,7 @@ DB_PATH = os.getenv("AUTHGRID_DB_PATH", "data/authgrid.db")
 st.set_page_config(page_title="AuthGrid Functional POC", page_icon="", layout="wide")
 
 st.title("AuthGrid — Functional POC")
-st.caption("VS Code–first implementation · Streamlit demonstration layer · deterministic detections")
+st.caption("VS Code–first implementation · Streamlit demonstration layer · deterministic rules + ML anomaly signals")
 
 with st.sidebar:
     st.header("POC controls")
@@ -109,9 +109,9 @@ with tab4:
 - Microsoft Entra sign-in and directory-audit events can be collected through Microsoft Graph.
 - Raw source events are normalized into a canonical AuthGrid event shape.
 - Duplicate source events are ignored using tenant/source/event identity.
-- Deterministic detection rules create explainable findings.
+- Deterministic detection rules and ML anomaly signals create explainable findings.
+- `ml_identity_anomaly` uses point-in-time behavioural features and an Isolation Forest model when enough events exist.
 - Every finding links back to source-event evidence.
 - Streamlit is only a thin UI; the core logic lives in `authgrid/core.py` and can later serve React.
-
-**Not production-ready:** this POC does not implement full tenant isolation, Event Hub streaming, enterprise RBAC, autonomous response, or production secret management.
+**Not production-ready:** this POC does not implement full tenant isolation, Event Hub streaming, enterprise RBAC, autonomous response, production model evaluation, or production secret management. An LLM investigation assistant is not yet connected; ML findings remain evidence-linked and human-reviewable.
 """)

@@ -222,6 +222,9 @@ def run_detections(db_path: str = DB_PATH, tenant_id: str | None = None) -> list
         if len(identities) >= 3 and len(failures) >= 3:
             evidence = [r["id"] for r in failures[:6]]
             found.append(Detection("password_spray", "multiple identities", "high", .90, 30, f"IP {ip} generated failures against {len(identities)} identities.", evidence, "password-spray-v1"))
+    # ML is an additional signal, not the authoritative source of truth.
+    from .ml_detector import detect_anomalies
+    found.extend(detect_anomalies(events))
     db = connect(db_path)
     for d in found:
         tenant = tenant_id or (events[0]["tenant_id"] if events else "demo-tenant")

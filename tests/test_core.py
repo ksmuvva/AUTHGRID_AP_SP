@@ -26,4 +26,5 @@ def test_demo_produces_evidence_backed_findings(tmp_path: Path):
     findings = run_detections(db_path, "demo-tenant")
     assert findings
     assert any(x.detection_type == "password_spray" for x in findings)
+    assert any(x.detection_type == "ml_identity_anomaly" for x in findings)
     assert all(x.evidence_event_ids for x in findings)
